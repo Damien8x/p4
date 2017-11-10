@@ -20,7 +20,8 @@ string SequenceEnum::getVariant()
 	int randomPosition = rand() % (wordLength- 1) + 0; 
 	char variantChar = word[randomPosition];
 	string varString(1, variantChar);
-	string variantWord = word.insert(randomPosition, varString); 
+	string variantWord = word;
+	variantWord = variantWord.insert(randomPosition, varString); 
 	return  variantWord;
 }
 
