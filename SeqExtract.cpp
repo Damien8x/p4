@@ -12,8 +12,14 @@ SeqExtract::SeqExtract(string word)
 {
 
 }	
+
+
+void SeqExtract::getVariant()
+{
+
+}
 	
-string SeqExtract::getSubSequence(string subSeq)
+string SeqExtract::getVariant(string subSeq)
 {
 if(word == subSeq)
 	return subSeq;

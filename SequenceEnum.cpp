@@ -7,14 +7,18 @@
 #include "SequenceEnum.h"
 #include <string>
 
+// protected attribute available to all derived classes
 string word;
 
 SequenceEnum::SequenceEnum(string p_word)
-	:word(p_word)
 {
+if (p_word.size() > 2)
+	this->word = p_word;
+else
+	delete this;
 }
 
-string SequenceEnum::getVariant()
+string SequenceEnum::getVariant() const
 {	
 	int wordLength = word.size();
 	int randomPosition = rand() % (wordLength- 1) + 0; 
@@ -25,14 +29,14 @@ string SequenceEnum::getVariant()
 	return  variantWord;
 }
 
-bool SequenceEnum::guessWord(string guessWord)
+bool SequenceEnum::guessWord(string guessWord) const
 {
 	return (word == guessWord) ? true : false;
 }
 
 
 
-string SequenceEnum::getWord()
+string SequenceEnum::getWord() const
 {
 	return word;
 }
