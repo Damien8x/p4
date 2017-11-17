@@ -14,53 +14,42 @@ SeqExtract::SeqExtract(string word)
 }	
 
 
-void SeqExtract::getVariant()
+string SeqExtract::getVariant()
 {
 
 }
 	
 string SeqExtract::getVariant(string subSeq)
 {
-if(word == subSeq)
-	return subSeq;
+	if(word == subSeq)
+		return "Word Match";
 
-int subSeqSize = subSeq.size();
-int wordSize = word.size();
+	int subSeqSize = subSeq.size();
+	int wordSize = word.size();
 
-if(subSeqSize > wordSize)
-	return "Word Too Long";
+	if(subSeqSize > wordSize)
+		return "Word Too Long";
 
-int subStringEndSize = wordSize - subSeqSize;
-string subStringEnd = word.substr(subStringEndSize, wordSize);
-string subStringStart = word.substr(0 , subStringEndSize);
-bool subStringFound = false;
+	int subStringStartSize = wordSize - ( wordSize - subSeqSize);
+	int subStringEndSize =wordSize - subSeqSize;
+	string subStringEnd = word.substr(subStringStartSize, wordSize);
+	string subStringEndSequence = word.substr(subStringEndSize, wordSize);
+	string subStringStart = word.substr(0 , subStringEndSize);
 
+	for(int i = 0; i < subSeqSize; i++)
+	{
+		 if(subSeq[i] != subStringEndSequence[i])
+			break;
+		return subStringStart;
+	}
 
-for(int i = 0; i < subSeqSize; i++)
-{
- if(subSeq[i] != subStringEnd[i]){
-	subStringFound = false;
-	break;
-}
-	return subStringStart;
+	for(int i = 0; i < subSeqSize; i++)
+	{
+		 if(subSeq[i] != word[i])
+			break;
+		return subStringEnd;
+	}
 
-}
-
-
-
-
-for(int i = 0; i < subSeqSize; i++)
-{
- if(subSeq[i] != word[i])
-{
-	subStringFound = false;
-	break;
-}
-	return subStringEnd;
-
-}
-
-
-return ("No substring detected ");
+	return ("No substring detected ");
 }	
 

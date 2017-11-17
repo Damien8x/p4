@@ -31,10 +31,14 @@
 //Constructor()		-> getWord()		 ON -> ON
 //getVariant() 		-> guessWord(string)	 ON -> ON
 //getVariant()		-> getWord()		 ON -> ON
+//getVariant()		-> getVariant()		 ON -> ON
 //guessWord(string) 	-> getVariant()		 ON -> ON
 //guessWord(string) 	-> getWord()		 ON -> ON
+//guessWord(string)	-> guessWord(string)	 ON -> ON
+//getWord()		-> getWord()		 ON -> ON
 //getWord()   		-> getVariant()		 ON -> ON
 //getWord()   		-> guessWord(string)	 ON -> ON  
+
 using namespace std;
 
 class SequenceEnum
@@ -51,11 +55,12 @@ SequenceEnum(string);
 
 //Description: Virtual function returns a string variant of encapsulated word.
 //New string may contain one or many repeating characters from attribute word,
-//as well as all characters of word in same sequence relative to " word".
-//Attribute word not impacted by function.
+//as well as all characters of word in same sequence relative to charactes in " word".
+//Attribute word not impacted by function. Attribute wordVariant will be mutated
+//and set back to original value before method ends.
 //precondition: object "ON"
 //postcondition object "ON"
-virtual string getVariant() const;
+virtual string getVariant();
 
 //Description: Returns true if passed argument is equal to encapsulated word.
 //precondition: object "OM"
@@ -69,6 +74,9 @@ string getWord() const;
 
 
 private:
+string wordVariant;
+
+string recursiveVariant();
 
 protected:
 string word;

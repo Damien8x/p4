@@ -13,7 +13,7 @@
 //class SequenceEnum and derived classes SeqExtract and SpasEnum. All public
 //methods will be tested for each class type, with a random distribution of
 //objects and insuring all objects remiain distinct. All state transitions
-//will be tested, while adhering to the Contract and invariants set forth by
+//will be tested, while adhering to the contract and invariants set forth by
 //each class, respectively.
 //
 //
@@ -23,11 +23,10 @@
 //test.
 
 using namespace std;
-string STAR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+string STAR = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
 void printGetVariant(SequenceEnum&);
 void printGetVariant(SpasEnum&);
 void printGetVariant(SeqExtract&, string);
-void printGetWord(SequenceEnum&);
 void printGuessWord(SequenceEnum&, string);
 void printWelcomeMessage();
 
@@ -35,23 +34,60 @@ int main(){
 
 printWelcomeMessage();
 
+//~create multiple distinct objects for base and drived classes~
 SequenceEnum seq("SequenceEnum");
-
+SequenceEnum seq2("second SequenceEnum");
+SequenceEnum seq3("3rd Base!");
 SeqExtract seqx("SeqExtract");
-
+SeqExtract seqx2("second SeqExtract");
+SeqExtract seqx3("the third SeqExtract object");
 SpasEnum spa("SpasEnum");
+SpasEnum spa2("second SpasEnum");
+SpasEnum spa3("THE THIRD spasENUM oBjEcT");
 
+//~print respective variants for all objects~
 printGetVariant(seq);
-
+printGetVariant(seq2);
+printGetVariant(seq3);
 printGetVariant(spa);
-
+printGetVariant(spa2);
+printGetVariant(spa3);
+//expect word variant: "Extract"
 printGetVariant(seqx, "Seq");
+//expect word variant: "second Seq"
+printGetVariant(seqx2, "Extract");
+//expect word variant: "Word Too Long"
+printGetVariant(seqx3, "THIS STRING IS TOOOOOOOOOOOOOO LONG");
+//expect word variant: "Word Match"
+printGetVariant(seqx2, "second SeqExtract");
+//expect word variant: "No substring detected"
+printGetVariant(seqx, "1");
 
+//~test guessWord functionality for derived and base classes~
 printGuessWord(seq, "SequenceEnum");
-
+printGuessWord(seq2, "not it");
 printGuessWord(seqx, "Seq");
-
+printGuessWord(seqx2, "second SeqExtract");
 printGuessWord(spa, "SpasEnum");
+printGuessWord(spa2, "not right");
+
+//~retest all objects respective variants~
+printGetVariant(seq);
+printGetVariant(seq2);
+printGetVariant(seq3);
+printGetVariant(spa);
+printGetVariant(spa2);
+printGetVariant(spa3);
+//expect word variant: "Extract"
+printGetVariant(seqx, "Seq");
+//expect word variant: "second Seq"
+printGetVariant(seqx2, "Extract");
+//expect word variant: "Word Too Long"
+printGetVariant(seqx3, "THIS STRING IS TOOOOOOOOOOOOOO LONG");
+//expect word variant: "Word Match"
+printGetVariant(seqx2, "second SeqExtract");
+//expect word variant: "No substring detected"
+printGetVariant(seqx, "1");
 
 return 0;
 }
@@ -64,7 +100,8 @@ return 0;
 //postcondition: ON
 void printGetVariant(SequenceEnum & obj)
 {
-cout << "original word:\t"<< obj.getWord() << endl << endl; 
+cout << "type:\t\tSequenceEnum"<<endl; 
+cout << "original word:\t"<< obj.getWord() << endl; 
 cout << "word variant:\t" << obj.getVariant() << endl << endl;
 cout << STAR << endl;
 
@@ -79,7 +116,8 @@ cout << STAR << endl;
 //postcondition: ON
 void printGetVariant(SpasEnum & obj)
 {
-cout << "original word:\t"<< obj.getWord() << endl << endl; 
+cout << "type:\t\tSpasEnum" << endl;
+cout << "original word:\t"<< obj.getWord() << endl; 
 cout << "word variant:\t" << obj.getVariant() << endl << endl;
 cout << STAR << endl;
 
@@ -95,20 +133,10 @@ cout << STAR << endl;
 //postcondition: ON
 void printGetVariant(SeqExtract & obj, string sub)
 {
-cout << "original word:\t"<< obj.getWord() << endl << endl; 
-cout << "word variant:\t" << obj.getVariant(sub) << endl << endl;
-cout << STAR << endl;
-
-}
-
-//Description: Formats and prints encapsulated word for SpasEnum,
-//SequenceEnum, or SeqExtract.
-//precondition: ON
-//mmodify: None
-//postcondition: ON
-void printGetWord(SequenceEnum & obj)
-{
-cout << "encapsulated word:\n " << obj.getWord() << endl << endl;
+cout << "type:\t\t\tSeqExtract" << endl;
+cout << "original word:\t\t"<< obj.getWord() << endl; 
+cout << "proffered subsequence:\t" << sub << endl; 
+cout << "word variant:\t\t" << obj.getVariant(sub) << endl << endl;
 cout << STAR << endl;
 
 }
@@ -127,6 +155,7 @@ cout <<"match:\t" << obj.guessWord(guess) << endl << endl;
 cout << STAR << endl;
 }
 
+//Description: Driver welcome message, displaying intent.
 void printWelcomeMessage()
 {
 cout << STAR << endl;
@@ -140,8 +169,8 @@ cout << "*\tDriver designed to test full functionality and limits of base\t\t*" 
 cout <<	"*\tclass SequenceEnum and derived classes SeqExtract and SpasEnum.\t\t*"<< endl;
 cout <<	"*\tALL public methods will be tested for each class type, with a\t\t*" << endl;
 cout <<	"*\trandom distribution of objects and insuring all objects remiain\t\t*" << endl;
-cout <<	"*\tdistinct. All State transitions will be tested, while adhering to\t*" << endl;
-cout <<	"*\tthe Contract and invariants set forth by each class, respectively.\t*" << endl;
+cout <<	"*\tdistinct. All state transitions will be tested, while adhering to\t*" << endl;
+cout <<	"*\tthe contract and invariants set forth by each class, respectively.\t*" << endl;
 cout << STAR << endl;
 
 }

@@ -10,24 +10,28 @@
 SpasEnum::SpasEnum(string word = " ")
 	:SequenceEnum(word)
 {
-
 }
+
 string SpasEnum::getVariant()
 {
 
-if(word.size() %2 == 0)
-{
-	string concat = concatenate();
-	return concat;
-}
-else
-{
- string trunc = truncate();
- return trunc;
-}
+	if(word.size() %2 == 0)
+	{
+		string concat = concatenate();
+		return concat;
+	}
+	else
+	{
+		 string trunc = truncate();
+		 return trunc;
+	}
 }
 	
-
+//Description: helper function for getVariant(), returning a concatenation
+//of encapsulated word and a randomly generated subsequence.
+//precondition:ON 
+//modify: None
+//postcondition:ON
 string SpasEnum::concatenate()
 {
 	string tempWord = word;
@@ -38,11 +42,16 @@ string SpasEnum::concatenate()
 	return concat;
 }
 
+//Description: helper function for getVariant(), returning a truncated
+//random subsequence of encapsulated word.
+//precondition: ON
+//modify: None
+//postcondition: ON
 string SpasEnum::truncate()
 {
 	string tempWord = word;
 	int wordSize = word.size();
-	int randomPosition = rand() % (wordSize) + 0 ;
+	int randomPosition = rand() % (wordSize) + 1 ;
 	string truncate = tempWord.substr(0, randomPosition);
 	return truncate;
 }
